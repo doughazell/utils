@@ -1,6 +1,12 @@
 #! /usr/bin/env ruby
 # !/usr/local/bin/ruby
 
+########################################################################
+#
+# 30/10/14 DH: Created in May 2012 (See '~/src/devlogeD/old/2012/15may')
+#
+########################################################################
+
 # Variable syntax
 # ---------------
 # Local  = lowercase letter or underscore name start (within block)
@@ -67,6 +73,12 @@ class GemsUsed
     longestKey = sortedGems.max { |a,b| a.length <=> b.length }
     longestVal = self.bundleList.values.max { |a,b| a.length <=> b.length }
 
+    # See "Ruby Kernel Methods" docs for 'sprintf' 'format_string' syntax
+    
+    # '%[Flags][Width]s':
+    #     "-" Flag = Left-justify
+    #     "#{longestKey.length}" Width = Display width
+    
     printf "%-#{longestKey.length}s VERSION %-#{longestVal.length}s GEMS\n", :GEM, :BUNDLE
     printf "%-#{longestKey.length}s ------- %-#{longestVal.length}s ----\n", "---", "------"
 
@@ -102,15 +114,17 @@ if __FILE__ == $0
 
   gems.getVersions
 
-  #puts "GEMS LIST"
-  #puts "---------"
-  #GemsUsed.print(gems.gemsList)
-  #puts "========="
+=begin (Multi-line comment block which needs to start at column 1)
+  puts "GEMS LIST"
+  puts "---------"
+  GemsUsed.print(gems.gemsList)
+  puts "========="
 
-  #puts "BUNDLE GEMS LIST"
-  #puts "----------------"
-  #GemsUsed.print(gems.bundleList)
-  #puts "================"
+  puts "BUNDLE GEMS LIST"
+  puts "----------------"
+  GemsUsed.print(gems.bundleList)
+  puts "================"
+=end
 
   gems.checkBundle
 end #if __FILE__ == $0
